@@ -59,7 +59,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     for summary in summaries:
         # Replace line breaks with spaces
         summary["summary"] = summary["summary"].replace("\n", " ")
-        new_content += f"title:[{summary['title']}]({summary['arxiv_link']}\n"
+        new_content += f"## [{summary['title']}]({summary['arxiv_link']})\n"
         new_content += f"summary:{summary['summary']}\n\n"
 
     day = date_str.split("-")[2]
