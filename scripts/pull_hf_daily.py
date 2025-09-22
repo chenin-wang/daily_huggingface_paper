@@ -19,8 +19,21 @@ from concurrent.futures import ThreadPoolExecutor,as_completed
 HF_BASE_URL = "https://huggingface.co"
 HF_PAPERS_URL = "https://huggingface.co/papers/date"
 def get_previous_weekday():
+    """
+    Get the previous weekday (Monday to Friday).
+    If today is Monday, return the date of the previous Friday.
+    If today is Saturday, return the date of the previous Friday.
+    If today is Sunday, return the date of the previous Friday.
+    If today is Tuesday to Friday, return the date of the previous day.
+    """
     today = datetime.now()
-    previous_day = today-timedelta(days=1)
+    day_of_week = today.weekday()
+    if day_of_week == 0: 
+        previous_day = today-timedelta(days=3)
+    elif day_of_week == 6: 
+        previous_day = today - timedelta(days=2)
+    else:
+        previous_day = today-timedelta(days=1)
     
     return previous_day.strftime("%Y-%m-%d")
 
